@@ -56,7 +56,7 @@ import kotlinx.coroutines.flow.debounce
 @Composable
 fun SearchScreen(
     navController: NavController = rememberNavController(),
-    searchVm: SearchViewModel = hiltViewModel()
+    searchVm: ISearchViewModel = FakeSearchViewModel()
 ) {
     var bookValue by rememberSaveable {
         mutableStateOf("")

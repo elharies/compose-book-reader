@@ -57,7 +57,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun BookDetailScreen(
     navController: NavController = rememberNavController(),
-    vmDetail: DetailViewModel = hiltViewModel(),
+    vmDetail: IDetailViewModel = FakeDetailViewModel(),
     bookId: String = ""
 ) {
     val detailState by vmDetail.detailBook.collectAsState()

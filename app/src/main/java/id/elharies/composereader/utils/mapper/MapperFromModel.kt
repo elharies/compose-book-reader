@@ -20,6 +20,6 @@ fun BookRes.Item.toMap() = Book(
     title = this.volumeInfo.title,
     author = this.volumeInfo.authors.joinToString(","),
     date = this.volumeInfo.publishedDate ?: Date().toString("yyyy-MM-dd"),
-    linkImage = this.volumeInfo.imageLinks.smallThumbnail,
+    linkImage = this.volumeInfo.imageLinks.thumbnail,
     desc = this.volumeInfo.description ?: "${this.volumeInfo.title} ${this.volumeInfo.publisher}"
 )

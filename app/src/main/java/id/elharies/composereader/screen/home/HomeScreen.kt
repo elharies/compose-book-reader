@@ -235,7 +235,7 @@ private fun YourReadingScreen(
             LazyRow(modifier = modifier.padding(top = 8.dp, start = 16.dp)) {
                 items(listBook) {
                     BookCard(modifier = Modifier, book = it) { b ->
-                        navController.navigate("${ReaderRoute.Detail.nameScreen}/${b.bookId}")
+                        navController.navigate("${ReaderRoute.Update.nameScreen}/${b.bookId}")
                     }
                     Spacer(modifier = modifier.width(16.dp))
                 }

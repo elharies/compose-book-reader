@@ -1,31 +1,27 @@
 package id.elharies.composereader.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraph
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import id.elharies.composereader.model.Book
 import id.elharies.composereader.screen.details.BookDetailScreen
-import id.elharies.composereader.screen.details.FakeDetailViewModel
-import id.elharies.composereader.screen.details.IDetailViewModel
+import id.elharies.composereader.screen.details.DetailViewModel
 import id.elharies.composereader.screen.home.FakeHomeViewModel
 import id.elharies.composereader.screen.home.HomeScreen
 import id.elharies.composereader.screen.home.IHomeViewModel
 import id.elharies.composereader.screen.login.FakeLoginViewModel
 import id.elharies.composereader.screen.login.ILoginViewModel
 import id.elharies.composereader.screen.login.LoginScreen
-import id.elharies.composereader.screen.search.FakeSearchViewModel
-import id.elharies.composereader.screen.search.ISearchViewModel
 import id.elharies.composereader.screen.search.SearchScreen
+import id.elharies.composereader.screen.search.SearchViewModel
 import id.elharies.composereader.screen.splash.FakeSplashViewModel
 import id.elharies.composereader.screen.splash.ISplashViewModel
 import id.elharies.composereader.screen.splash.SplashScreen
 import id.elharies.composereader.screen.update.UpdateScreen
+import id.elharies.composereader.screen.update.UpdateViewModel
 import id.elharies.composereader.utils.constans.KeyArguments
 
 @Composable
@@ -49,7 +45,8 @@ fun ReaderNavigation(
             )
         }
         composable(route = ReaderRoute.Search.nameScreen) {
-            SearchScreen(navController = nav)
+            val searchVm: SearchViewModel = hiltViewModel()
+            SearchScreen(navController = nav, searchVm = searchVm)
         }
         composable(route = ReaderRoute.Stats.nameScreen) {
 
@@ -63,7 +60,8 @@ fun ReaderNavigation(
             )
         ) {
             val bookId = it.arguments?.getString(KeyArguments.keyBook) ?: ""
-            UpdateScreen(navController = nav, bookId = bookId)
+            val viewModel: UpdateViewModel = hiltViewModel()
+            UpdateScreen(navController = nav, bookId = bookId, viewModel = viewModel)
         }
         composable(
             route = "${ReaderRoute.Detail.nameScreen}/{${KeyArguments.keyBook}}",
@@ -74,7 +72,8 @@ fun ReaderNavigation(
             )
         ) {
             val bookId = it.arguments?.getString(KeyArguments.keyBook) ?: ""
-            BookDetailScreen(navController = nav, bookId = bookId)
+            val viewModel: DetailViewModel = hiltViewModel()
+            BookDetailScreen(navController = nav, bookId = bookId, vmDetail = viewModel)
         }
     }
 }

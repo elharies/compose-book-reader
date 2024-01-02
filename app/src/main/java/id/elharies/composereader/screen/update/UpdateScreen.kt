@@ -73,8 +73,7 @@ import retrofit2.http.Header
 fun UpdateScreen(
     navController: NavController = rememberNavController(),
     bookId: String = "",
-    // temp use fake viewmodel, don't forget change to hiltViewModel
-    viewModel: UpdateViewModel = hiltViewModel()
+    viewModel: IUpdateScreenViewModel = FakeUpdateScreenViewModel()
 ) {
     val bookState by viewModel.books.collectAsStateWithLifecycle()
     val deletedState by viewModel.deletedBook.collectAsStateWithLifecycle()
@@ -242,7 +241,7 @@ private fun updateBook(
     isFinishReading: Boolean,
     notesValue: String,
     ratingValue: Double,
-    viewModel: UpdateViewModel
+    viewModel: IUpdateScreenViewModel
 ) {
     val startTimeStamp = if (isStartReading) Timestamp.now() else book.startedReading
     val finishTimeStamp = if (isFinishReading) Timestamp.now() else book.finishedReading
